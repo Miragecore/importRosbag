@@ -77,6 +77,12 @@ def importTopic(msgs, **kwargs):
         elif fmtString in ['bgra8', 'rgba8']:
             frameData = np.frombuffer(data[ptr:ptr+height*width*4],np.uint8)
             depth = 4
+        elif fmtString in ['bayer_bggr8', 'bayer_gbrg8', 'bayer_grbg8', 'bayer_rggb8']:
+            frameData = np.frombuffer(data[ptr:ptr+height*width*1],np.uint8)
+            depth = 1
+        elif fmtString in ['bayer_bggr16', 'bayer_gbrg16', 'bayer_grbg16', 'bayer_rggb16']:
+            frameData = np.frombuffer(data[ptr:ptr+height*width*2],np.uint16)
+            depth = 1
         elif fmtString == '16SC1':
             frameData = np.frombuffer(data[ptr:ptr+height*width*2],np.int16)
             depth = 1
